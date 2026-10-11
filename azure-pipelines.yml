@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+      versionSpec: '3.10'
+  displayName: "Installing Python"
+
+- script: |
+    make install
+    make lint
+    make test
+  displayName: 'Linting and Testing the code'
